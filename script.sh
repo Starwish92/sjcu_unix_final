@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 
-echo $(which bash)
+#유닉스 및 리눅스 시스템 기말과제
+#소프트웨어 공학과 20931566 박영진
 
 repeat=1
 question1="1.콜라:850원, 2.사이다:800원, 3.환타:750원, 4.생수:500원"
@@ -53,7 +54,7 @@ function calculate_change()
     let change=money-product_price
     if (( $2 > $3 )); then
         echo "지불하신 금액이 부족합니다."
-    elif (( $1 < $3-$4 )); then
+    elif (( $1 < $3 - $4 )); then
         echo "최대 거스름돈을 초과합니다."
     else
         echo "잔돈 : ${change}"
@@ -62,7 +63,7 @@ function calculate_change()
             ch_1000=5
             let change-=5000
         else
-            change-=1000*${ch_1000}
+            let change-=1000*${ch_1000}
         fi
         #let change=change%1000
         let ch_500=change/500
@@ -93,6 +94,11 @@ function calculate_change()
         if (( ch_1000 > bank_1000 || ch_500 > bank_500 || ch_100 > bank_100 || ch_50 > bank_50 || ch_10 > bank_10 )); then
             echo "거스름돈 수량을 초과합니다."
         else
+            let bank_1000-=ch_1000
+            let bank_500-=ch_500
+            let bank_100-=ch_100
+            let bank_50-=ch_50
+            let bank_10-=ch_10
             if (( ch_1000 > 0 )); then
                 ret_str+="천원:${ch_1000}개 "
             fi
